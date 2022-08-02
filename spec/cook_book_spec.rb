@@ -45,6 +45,10 @@ RSpec.describe CookBook do
       expect(@cookbook.highest_calorie_meal).to eq(@recipe2)
     end
 
+    it 'can return the time the cookbook was created' do
+      expect(@cookbook.date).to eq('08-02-2022')
+    end
+
   end
 
 end
