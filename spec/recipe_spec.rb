@@ -21,7 +21,7 @@ RSpec.describe Recipe do
     recipe1.add_ingredient(ingredient1, 4)
     recipe1.add_ingredient(ingredient2, 8)
     expected = {
-      ingredient1 => 6
+      ingredient1 => 6,
       ingredient2 => 8
     }
 
@@ -36,5 +36,5 @@ RSpec.describe Recipe do
 
     expect(recipe1.ingredients).to eq(expected)
   end
-  
+
 end
