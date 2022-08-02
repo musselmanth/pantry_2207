@@ -20,4 +20,8 @@ class Recipe
     @ingredients_required.sum{ |ingredient, qty| ingredient.calories * qty }
   end
 
+  def caloricly_sorted_ingredients_req
+    @ingredients_required.sort_by{ |ingredient, qty| -ingredient.calories * qty }.to_h
+  end
+
 end
