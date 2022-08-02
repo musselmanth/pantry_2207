@@ -2,9 +2,9 @@ require './lib/pantry'
 require './lib/ingredient'
 
 RSpec.describe Pantry do
-    let(ingredient1){Ingredient.new({name: "Cheese", unit: "oz", calories: 50})}
-    let(ingredient2){Ingredient.new({name: "Macaroni", unit: "oz", calories: 200})}
-    let(pantry){Pantry.new}
+    let(:ingredient1){Ingredient.new({name: "Cheese", unit: "oz", calories: 50})}
+    let(:ingredient2){Ingredient.new({name: "Macaroni", unit: "oz", calories: 200})}
+    let(:pantry){Pantry.new}
 
     it 'exists' do
       expect(pantry).to be_an(Pantry)
@@ -22,7 +22,7 @@ RSpec.describe Pantry do
       pantry.restock(ingredient1, 5)
       pantry.restock(ingredient1, 10)
       
-      expeect(pantry.stock_check(ingredient1)).to eq(15)
+      expect(pantry.stock_check(ingredient1)).to eq(15)
     end
 
     it 'can restock a different ingredient' do
