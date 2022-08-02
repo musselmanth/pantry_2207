@@ -1,5 +1,6 @@
 require './lib/pantry'
 require './lib/ingredient'
+require './lib/recipe'
 
 RSpec.describe Pantry do
     let(:ingredient1){Ingredient.new({name: "Cheese", unit: "oz", calories: 50})}
@@ -28,6 +29,24 @@ RSpec.describe Pantry do
     it 'can restock a different ingredient' do
       pantry.restock(ingredient2, 7)
       expect(pantry.stock_check(ingredient2)).to eq(7)
+    end
+
+    it 'can tell if it has enough ingredients for a recipe' do
+      recipe1 = Recipe.new("Mac and Cheese")
+      recipe1.add_ingredient(ingredient1, 2)
+      recipe1.add_ingredient(ingredient2, 8)
+      pantry.restock(ingredient1, 5)
+      pantry.restock(ingredient1, 10)
+
+      expect(pantry.enough_ingredients_for?(recipe1)).to be false
+      
+      pantry.restock(ingredient2, 7)
+
+      expect(pantry.enough_ingredients_for?(recipe1)).to be false
+      
+      pantry.restock(ingredient2, 1)
+      
+      expect(pantry.enough_ingredients_for?(recipe1)).to be true
     end
 
 end
