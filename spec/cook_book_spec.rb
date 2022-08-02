@@ -10,7 +10,7 @@ RSpec.describe CookBook do
     @recipe1 = Recipe.new("Mac and Cheese")
     @recipe1.add_ingredient(@ingredient1, 2)
     @recipe1.add_ingredient(@ingredient2, 8)
-    @recipe2 = Recipe.new("Cheese Burger")
+    @recipe2 = Recipe.new("Burger")
     @recipe2.add_ingredient(@ingredient1, 2)
     @recipe2.add_ingredient(@ingredient3, 4)
     @recipe2.add_ingredient(@ingredient4, 1)
@@ -44,9 +44,60 @@ RSpec.describe CookBook do
     it 'can return the highest calorie meal' do
       expect(@cookbook.highest_calorie_meal).to eq(@recipe2)
     end
+  
+  end
+
+  context 'iteration 4' do
 
     it 'can return the time the cookbook was created' do
       expect(@cookbook.date).to eq('08-02-2022')
+    end
+
+    it 'can return a summary' do
+
+      ingredient3 = Ingredient.new({name: "Ground Beef", unit: "oz", calories: 100})
+      ingredient4 = Ingredient.new({name: "Bun", unit: "g", calories: 1})
+      recipe2 = Recipe.new("Burger")
+      recipe2.add_ingredient(ingredient3, 4)
+      recipe2.add_ingredient(ingredient4, 100)
+      @cookbook.add_recipe(@recipe1)
+      @cookbook.add_recipe(recipe2)
+
+      expected = [
+        {
+          :name=>"Mac and Cheese", 
+          :details=> {
+            :ingredients=>[
+              {
+                :ingredient=>"Macaroni", 
+                :amount=>"8 oz"
+              }, 
+              {
+                :ingredient=>"Cheese", 
+                :amount=>"2 C"
+              }
+            ], 
+            :total_calories=>440
+          }
+        }, 
+        {
+          :name=>"Burger", 
+          :details=>{
+            :ingredients=>[
+              {
+                :ingredient=>"Ground Beef", 
+                :amount=>"4 oz"
+              }, 
+              {
+                :ingredient=>"Bun",
+                :amount=>"100 g"
+              }
+            ], 
+            :total_calories=>500
+          }
+        }
+      ]
+      expect(@cookbook.summary).to eq(expected)
     end
 
   end
