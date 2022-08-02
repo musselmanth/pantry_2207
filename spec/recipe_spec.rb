@@ -51,4 +51,13 @@ RSpec.describe Recipe do
     expect(recipe2.total_calories).to eq(675)
   end
 
+  it 'can sort ingredient rquirements by calories from lowest to highest' do
+    recipe1.add_ingredient(ingredient1, 2)
+    recipe1.add_ingredient(ingredient2, 8)
+
+    expected = {ingredient2 => 8, ingredient1 => 2}
+
+    expect(recipe1.caloricly_sorted_ingredients_req).to eq(expected)
+  end
+
 end
